@@ -1,3 +1,4 @@
+import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_users/widgets/app_large_text.dart';
 //import 'package:thesisapp_test/widgets/app_short_text.dart';
@@ -105,7 +106,7 @@ class _ConsumerPageState extends State<ConsumerPage>
     }
 
     TabController tabController = TabController(length: 2, vsync: this);
-
+    TextEditingController textController = TextEditingController();
     return Scaffold(
         drawer: const NavigationDrawerWidget(),
         appBar: AppBar(
@@ -115,13 +116,15 @@ class _ConsumerPageState extends State<ConsumerPage>
           ),
           elevation: 0,
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.notifications),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.search),
+            AnimSearchBar(
+              width: 250,
+              textController: textController,
+              onSuffixTap: () {
+                setState(() {
+                  textController.clear();
+                });
+              },
+              color: Colors.deepOrange[200]!,
             ),
           ],
         ),
