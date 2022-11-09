@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_users/pages/navpages/termsandconditions_page.dart';
 import 'package:flutter_firebase_users/pages/navpages/contact-us_page.dart';
+import 'package:flutter_firebase_users/pages/navpages/booking-history.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   const NavigationDrawerWidget({super.key});
@@ -23,9 +24,9 @@ class NavigationDrawerWidget extends StatelessWidget {
                 onClicked: (() => selectedItem(context, 0))),
             const SizedBox(height: 10.0),
             buildMenuItem(
-              text: 'Booking History',
-              icon: Icons.history,
-            ),
+                text: 'Booking History',
+                icon: Icons.history,
+                onClicked: (() => bookingHistory(context, 0))),
             const SizedBox(height: 10.0),
             buildMenuItem(
               text: 'Favorites',
@@ -70,6 +71,17 @@ class NavigationDrawerWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bookingHistory(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => BookingHistory(),
+        ));
+        break;
+      default:
+    }
   }
 
   contactUs(BuildContext context, int index) {
