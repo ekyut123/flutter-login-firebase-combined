@@ -32,7 +32,7 @@ class _SettingsPage extends State<SettingsPage> {
         brightness: _getBrightness(),
       ),
       child: Scaffold(
-        backgroundColor: _dark ? null : Colors.grey.shade200,
+        backgroundColor: _dark ? null : Colors.white,
         appBar: AppBar(
           elevation: 0,
           // ignore: deprecated_member_use
@@ -69,6 +69,7 @@ class _SettingsPage extends State<SettingsPage> {
                     color: Colors.deepOrange,
                     child: ListTile(
                       onTap: () {
+                        //dito pwede magpalit ng name yung user
                         //open edit profile
                       },
                       title: const Text(
@@ -113,18 +114,6 @@ class _SettingsPage extends State<SettingsPage> {
                           trailing: const Icon(Icons.keyboard_arrow_right),
                           onTap: () {
                             //open change language
-                          },
-                        ),
-                        _buildDivider(),
-                        ListTile(
-                          leading: const Icon(
-                            Icons.location_on,
-                            color: Colors.deepOrange,
-                          ),
-                          title: const Text("Change Location"),
-                          trailing: const Icon(Icons.keyboard_arrow_right),
-                          onTap: () {
-                            //open change location
                           },
                         ),
                       ],
