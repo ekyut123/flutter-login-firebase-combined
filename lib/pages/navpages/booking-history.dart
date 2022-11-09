@@ -17,22 +17,22 @@ class BookingHistory extends StatelessWidget {
           Card(
               child: ListTile(
             title: Text("#1"),
-            subtitle: Text("The battery is full."),
+            subtitle: Text("Name:"),
           )),
           Card(
               child: ListTile(
             title: Text("#2"),
-            subtitle: Text("The battery is full."),
+            subtitle: Text("Name:"),
           )),
           Card(
               child: ListTile(
             title: Text("#3"),
-            subtitle: Text("The battery is full."),
+            subtitle: Text("Name:"),
           )),
           Card(
               child: ListTile(
             title: Text("#4"),
-            subtitle: Text("The battery is full."),
+            subtitle: Text("Name:"),
           )),
         ],
       ),
