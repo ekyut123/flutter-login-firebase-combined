@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_users/pages/navpages/settings_page.dart';
 import 'package:flutter_firebase_users/pages/navpages/termsandconditions_page.dart';
 import 'package:flutter_firebase_users/pages/navpages/contact-us_page.dart';
 import 'package:flutter_firebase_users/pages/navpages/booking-history.dart';
+import 'package:flutter_firebase_users/pages/navpages/settings_page.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   const NavigationDrawerWidget({super.key});
@@ -42,6 +45,7 @@ class NavigationDrawerWidget extends StatelessWidget {
             buildMenuItem(
               text: 'Settings',
               icon: Icons.settings,
+              onClicked: (() => settingsPage(context, 0)),
             ),
             const SizedBox(height: 270.0),
             //added for logout -rob :)
@@ -71,6 +75,17 @@ class NavigationDrawerWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  settingsPage(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => SettingsPage(),
+        ));
+        break;
+      default:
+    }
   }
 
   bookingHistory(BuildContext context, int index) {
