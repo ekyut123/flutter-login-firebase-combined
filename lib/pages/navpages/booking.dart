@@ -4,7 +4,7 @@ import 'package:flutter_firebase_users/widgets/app_large_text.dart';
 import 'package:flutter_firebase_users/widgets/image_banner.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
-
+import 'package:date_time_picker_widget/date_time_picker_widget.dart';
 import '../../widgets/app_long_text.dart';
 
 class BookingPage extends StatefulWidget {
@@ -17,14 +17,15 @@ class BookingPage extends StatefulWidget {
 
 class _BookingPageState extends State<BookingPage> {
   //text editing controller for text field
-  TextEditingController dateInput = TextEditingController();
-  TextEditingController timeInput = TextEditingController();
-
-  @override
-  void initState() {
-    timeInput.text = ""; //set the initial value of text field
-    super.initState();
-  }
+  // TextEditingController dateInput = TextEditingController();
+  // TextEditingController timeInput = TextEditingController();
+  late String _d1 = "";
+  late String _t1 = "";
+  // @override
+  // void initState() {
+  //   timeInput.text = ""; //set the initial value of text field
+  //   super.initState();
+  // }
 
   void _showDialog() {
     showDialog(
@@ -59,21 +60,20 @@ class _BookingPageState extends State<BookingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          // Add your onPressed code here!
-          _showDialog();
-        },
-        label: const Text('Book'),
-        icon: const Icon(Icons.book),
-        backgroundColor: Colors.deepOrange,
-      ),
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const ImageBanner("images/hand-treatment.jpg"),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            // Add your onPressed code here!
+            _showDialog();
+          },
+          label: const Text('Book'),
+          icon: const Icon(Icons.book),
+          backgroundColor: Colors.deepOrange,
+        ),
+        appBar: AppBar(),
+        body: SingleChildScrollView(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const ImageBanner("images/services/hand-treatment.jpg"),
             const SizedBox(height: 10),
             //service title
             Container(
@@ -86,7 +86,7 @@ class _BookingPageState extends State<BookingPage> {
               child: const Text('₱ 350.00',
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 15,
+                      fontSize: 20,
                       fontWeight: FontWeight.w600)),
             ),
             //service description
@@ -98,103 +98,67 @@ class _BookingPageState extends State<BookingPage> {
                 color: Colors.black,
               ),
             ),
-            //date
-            Container(
-              padding: const EdgeInsets.fromLTRB(50, 5, 150, 0),
-              height: MediaQuery.of(context).size.width / 5,
-              child: Center(
-                child: TextField(
-                  controller: dateInput,
-                  //editing controller of this TextField
-                  decoration: const InputDecoration(
-                      icon: Icon(Icons.calendar_today), //icon of text field
-                      labelText: "Enter Date" //label text of field
-                      ),
-                  readOnly: true,
-                  //set it true, so that the user will not able to edit text
-                  onTap: () async {
-                    DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1950),
-                        //DateTime.now() - not to allow to choose before today
-                        lastDate: DateTime(2100));
-
-                    if (pickedDate != null) {
-                      // ignore: avoid_print
-                      print(
-                          pickedDate); //pickedDate output format => 2022-10-07
-
-                      String formattedDate =
-                          DateFormat('yyyy-MM-dd').format(pickedDate);
-                      // ignore: avoid_print
-                      print(
-                          formattedDate); //formatted date output using intl package => 2022-10-07
-                      setState(() {
-                        dateInput.text =
-                            formattedDate; //set output date to TextField value
-                      });
-                    } else {}
-                  },
+            SafeArea(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(height: 24),
+                      _dateTimePicker(),
+                      const SizedBox(height: 24),
+                      const Divider(),
+                      const SizedBox(height: 24),
+                    ],
+                  ),
                 ),
               ),
             ),
-            //time
-            Container(
-              padding: const EdgeInsets.fromLTRB(50, 5, 150, 0),
-              height: MediaQuery.of(context).size.width / 5,
-              child: Center(
-                child: TextField(
-                    controller:
-                        timeInput, //editing controller of this TextField
-                    decoration: const InputDecoration(
-                        icon: Icon(Icons.timer), //icon of text field
-                        labelText: "Enter Time" //label text of field
-                        ),
-                    readOnly: true,
-                    //set it true, so that the user will not able to edit text
-                    onTap: () async {
-                      TimeOfDay? pickedTime = await showTimePicker(
-                        initialTime: TimeOfDay.now(),
-                        context: context,
-                      );
-                      if (pickedTime != null) {
-                        // ignore: avoid_print, use_build_context_synchronously
-                        print(pickedTime.format(context));
-                        DateTime parsedTime = DateFormat.jm()
-                            // ignore: use_build_context_synchronously
-                            .parse(pickedTime.format(context).toString());
-                        //converting to DateTime so that we can further format on different pattern.
-                        // ignore: avoid_print
-                        print(parsedTime);
-                        String formattedTime =
-                            DateFormat('HH:mm a').format(parsedTime);
-                        // ignore: avoid_print
-                        print(formattedTime);
-                        //DateFormat() is from intl package, you can format the time on any pattern you need.
-                        setState(() {
-                          timeInput.text =
-                              formattedTime; //set the value of text field
-                        });
-                      } else {
-                        // ignore: avoid_print
-                        print("Time is not selected");
-                      }
-                    }),
-              ),
-            ),
-            const Card(
-              child: ListTile(
-                leading: Icon(
-                  Icons.person,
-                  color: Colors.black,
-                ),
-                title: Text("Jericho"),
-              ),
-            ),
-          ],
+          ]),
+        ));
+  }
+
+  Widget _dateTimePicker() {
+    final dt = DateTime.now();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'Date & Time',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headline6,
         ),
-      ),
+        const SizedBox(height: 8),
+        Text(
+          'Date: $_d1  Time: $_t1',
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.bodyText2,
+        ),
+        const SizedBox(height: 16),
+        DateTimePicker(
+          initialSelectedDate: dt,
+          startDate: dt.subtract(const Duration(days: 1)),
+          endDate: dt.add(const Duration(days: 60)),
+          startTime: DateTime(dt.year, dt.month, dt.day, 6),
+          endTime: DateTime(dt.year, dt.month, dt.day, 18),
+          timeInterval: const Duration(minutes: 30),
+          datePickerTitle: 'Pick a date',
+          timePickerTitle: 'Pick a time',
+          is24h: false,
+          numberOfWeeksToDisplay: 4,
+          onDateChanged: (date) {
+            setState(() {
+              _d1 = DateFormat('dd MMM, yyyy').format(date);
+            });
+          },
+          onTimeChanged: (time) {
+            setState(() {
+              _t1 = DateFormat('hh:mm:ss aa').format(time);
+            });
+          },
+        )
+      ],
     );
   }
 }
