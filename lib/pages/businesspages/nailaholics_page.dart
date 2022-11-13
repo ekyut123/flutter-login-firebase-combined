@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:quick_feedback/quick_feedback.dart';
 
 List services = [
   'images/services/foot-treatment.jpg',
@@ -49,6 +50,28 @@ class _MapScreenState extends State<MapScreen> {
     super.initState();
     _getPolyline();
   }
+
+  // void _showFeedback(context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return QuickFeedback(
+  //           title: "Leave a feedback", //Title of dialog
+  //           showTextBox: false, //default false
+  //           textBoxHint:
+  //               "Share your feedback", //Feedback text field hind text default: Tell us more
+  //           submitText: "SUBMIT", //submit button text default: SUBMIT
+  //           onSubmitCallback: (feedback) {
+  //             print('$feedback'); //map {ratingL 2, feedbackL: 'some feedback' }
+  //             Navigator.of(context).pop();
+  //           },
+  //           askLaterText: "ASK LATER",
+  //           onAskLaterCallback: () {
+  //             print("Do something on ask later click");
+  //           });
+  //     },
+  //   );
+  // }
 
   _addPolyLine() {
     PolylineId id = const PolylineId("poly");
@@ -160,13 +183,15 @@ class _MapScreenState extends State<MapScreen> {
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
-                                Card(
-                                  child: Image.asset(service),
-                                ),
+                                Card(child: Image.asset(service)),
                                 Text(sName)
                               ],
                             );
                           })),
+                  // Center(
+                  //   child: TextButton(
+                  //       onPressed: () => _showFeedback(context),
+                  //       child: const Text("Feedback")),
                 ],
               );
             }),
