@@ -31,6 +31,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    quick_feedback: ^0.1.1
   firebase_core: ^1.23.0
   firebase_auth: ^3.10.0
   form_field_validator: ^1.1.0
