@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:quick_feedback/quick_feedback.dart';
+import 'package:quick_feedback/quick_feedback.dart';
 
 List services = [
   'images/services/foot-treatment.jpg',
@@ -51,27 +51,27 @@ class _MapScreenState extends State<MapScreen> {
     _getPolyline();
   }
 
-  // void _showFeedback(context) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return QuickFeedback(
-  //           title: "Leave a feedback", //Title of dialog
-  //           showTextBox: false, //default false
-  //           textBoxHint:
-  //               "Share your feedback", //Feedback text field hind text default: Tell us more
-  //           submitText: "SUBMIT", //submit button text default: SUBMIT
-  //           onSubmitCallback: (feedback) {
-  //             print('$feedback'); //map {ratingL 2, feedbackL: 'some feedback' }
-  //             Navigator.of(context).pop();
-  //           },
-  //           askLaterText: "ASK LATER",
-  //           onAskLaterCallback: () {
-  //             print("Do something on ask later click");
-  //           });
-  //     },
-  //   );
-  // }
+  void _showFeedback(context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return QuickFeedback(
+            title: "Leave a feedback", //Title of dialog
+            showTextBox: true, //default false
+            textBoxHint:
+                "Share your feedback", //Feedback text field hind text default: Tell us more
+            submitText: "SUBMIT", //submit button text default: SUBMIT
+            onSubmitCallback: (feedback) {
+              print('$feedback'); //map {ratingL 2, feedbackL: 'some feedback' }
+              Navigator.of(context).pop();
+            },
+            askLaterText: "ASK LATER",
+            onAskLaterCallback: () {
+              print("Do something on ask later click");
+            });
+      },
+    );
+  }
 
   _addPolyLine() {
     PolylineId id = const PolylineId("poly");
@@ -131,7 +131,7 @@ class _MapScreenState extends State<MapScreen> {
                 children: <Widget>[
                   Container(
                     alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.fromLTRB(10, 15, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
                     color: Colors.white,
                     child: const Text(
                       'Nail-a-Holics - Lipa, Lipa City',
@@ -141,7 +141,7 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.fromLTRB(10, 15, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
                     color: Colors.white,
                     child: const Text(
                       'Opening Hours',
@@ -151,7 +151,7 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.fromLTRB(10, 15, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 15, 0, 0),
                     color: Colors.white,
                     child: const Text(
                       'Monday - Sunday : 10:00 - 21:00',
@@ -188,10 +188,10 @@ class _MapScreenState extends State<MapScreen> {
                               ],
                             );
                           })),
-                  // Center(
-                  //   child: TextButton(
-                  //       onPressed: () => _showFeedback(context),
-                  //       child: const Text("Feedback")),
+                  ElevatedButton(
+                    onPressed: () => _showFeedback(context),
+                    child: const Text("Feedback"),
+                  ),
                 ],
               );
             }),
