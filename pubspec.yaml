@@ -31,7 +31,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-    quick_feedback: ^0.1.1
+  quick_feedback: ^0.1.1
   firebase_core: ^1.23.0
   firebase_auth: ^3.10.0
   form_field_validator: ^1.1.0
@@ -48,6 +48,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   pluto_menu_bar: ^1.1.4
+  anim_search_bar: ^2.0.2
 
 dev_dependencies:
   flutter_test:
